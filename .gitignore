@@ -1,0 +1,7 @@
+*.TPU
+*.OBJ
+
+src/3DGAME.OVR
+src/GAMEDATA/
+src/INSTALL.EXE
+src/PT2.EXE
