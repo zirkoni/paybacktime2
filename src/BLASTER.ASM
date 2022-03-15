@@ -34,7 +34,7 @@ PUBLIC set_dsp,set_irq,disable_irq
 PUBLIC speaker_on,speaker_off,set_dma
 PUBLIC stop_dma,waitport
 
-PROC waitport
+waitport PROC
 mov cx,30000
 wlo:
 dec  cx
@@ -48,7 +48,7 @@ pois:
 ret
 ENDP
 
-PROC init_sb ibase:WORD,idma:BYTE,iirq:BYTE
+init_sb PROC ibase:WORD,idma:BYTE,iirq:BYTE
 mov ax,[ibase]
 mov [base],ax
 mov al,[idma]
@@ -69,7 +69,7 @@ out 0ah,al
 ret
 ENDP init_sb
 
-PROC set_direction direc:BYTE
+set_direction PROC direc:BYTE
 cmp [direc],0
 je  da
 da:
@@ -85,7 +85,7 @@ out 0bh,al
 ret
 ENDP set_direction
 
-PROC set_freq ifreq:WORD
+set_freq PROC ifreq:WORD
 mov ax,[ifreq]
 mov [ifreq],ax
 mov bx,ax
@@ -127,7 +127,7 @@ out dx,al
 ret
 ENDP set_freq
 
-PROC reset_dsp
+reset_dsp PROC
 mov dx,[base]
 ;reset dsp
 add dx,0006h
@@ -144,7 +144,7 @@ out dx,al
 ret
 ENDP reset_dsp
 
-PROC set_irq handler:DWORD
+set_irq PROC handler:DWORD
 mov  al,[irq]
 test al,8       ; onko 7
 jz   kymppi1
@@ -188,7 +188,7 @@ jatkopois2:
 ret
 ENDP set_irq
 
-PROC disable_irq
+disable_irq PROC
 push ds
 mov  cl,[irq]
 mov  ah,1
@@ -221,7 +221,7 @@ pop  ds
 ret
 ENDP disable_irq
 
-PROC speaker_on
+speaker_on PROC
 call waitport
 mov  dx,[base]
 add  dx,000ch
@@ -230,7 +230,7 @@ out  dx,al
 ret
 ENDP speaker_on
 
-PROC speaker_off
+speaker_off PROC
 call waitport
 mov  dx,[base]
 add  dx,000ch
@@ -239,7 +239,7 @@ out  dx,al
 ret
 ENDP speaker_off
 
-PROC set_dma data1:DWORD,soffs:WORD,isize:WORD
+set_dma PROC data1:DWORD,soffs:WORD,isize:WORD
 pushf
 cli
 mov al,04h
@@ -282,7 +282,7 @@ popf
 ret
 ENDP set_dma
 
-PROC set_dsp
+set_dsp PROC
 pushf
 cli
 call waitport
@@ -312,7 +312,7 @@ popf
 ret
 ENDP set_dsp
 
-PROC stop_dma
+stop_dma PROC
 mov  al,04h
 or   al,[dma]
 out  0ah,al

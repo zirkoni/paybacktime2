@@ -29,7 +29,7 @@ FreqRange	=	FreqEnd-FreqStart
 ;께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께
 ; This stops music playback (stops sound channels).
 ;컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴
-PROC EndPlayer
+EndPlayer PROC
               	push	ax
 		mov	ax,020h shl 8
 	@@la0:	call	Adlib
@@ -48,7 +48,7 @@ ENDP EndPlayer
 ; OUT:
 ;	Carry	- set on error (such as invalid module)
 ;컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴
-PROC InitPlayer musicseg:WORD
+InitPlayer PROC musicseg:WORD
                 pusha
 
                 mov     es,musicseg
@@ -141,7 +141,7 @@ ENDP    InitPlayer
 ; to maintain accurate music playback.  Refer to accompanying timer source-code
 ; for ways of providing a 50/sec timer service.
 ;컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴
-PROC PlayMusic
+PlayMusic PROC
               	pusha
 		push	ds
 
