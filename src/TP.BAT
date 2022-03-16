@@ -1,7 +1,7 @@
-tpc sbunit.pas -$e+ -$g+ -$n+ -$a+ -$l- -$s- -$i-
-tpc varunit.pas -$e+ -$g+ -$n+ -$a+ -$l- -$s- -$i-
-tpc extunit.pas -$e+ -$g+ -$n+ -$a+ -$l- -$s- -$i-
-tpc pbtunit.pas -$e+ -$g+ -$n+ -$a+ -$l- -$s- -$i-
-tpc gamemisc.pas -$e+ -$g+ -$n+ -$a+ -$l- -$s- -$i-
-::tpc 3dgame.pas -$e+ -$g+ -$n+ -$a+ -$l- -$s- -$i-
-::tpc pt2.pas -$e+ -$g+ -$n+ -$a+ -$l- -$s- -$i-
+set options=-$E+ -$G+ -$N+ -$A+ -$L- -$S- -$I-
+
+tpc sbunit.pas %options%
+tpc varunit.pas %options%
+tpc extunit.pas %options%
+tpc pbtunit.pas %options%
+tpc gamemisc.pas %options%
