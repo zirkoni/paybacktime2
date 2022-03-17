@@ -14,17 +14,17 @@ route8 proc near
 
        mov si,bx
        shl si,1
-       mov word ptr [fs:si],dx         ; [ownseg:cord]:=distance
+       mov word ptr fs:[si],dx         ; [ownseg:cord]:=distance
 
        mov si,dx
-       mov [fs:si+30000],cl            ; [ownseg:cord+30000]:=route
+       mov fs:[si+30000],cl            ; [ownseg:cord+30000]:=route
 
        cmp bx,lx                       ; If at endx/endy begins here
        jne @pois1
        mov di,dx                       ; how many steps
 @l1:
-       mov si,[fs:di+30000]
-       mov [fs:di+50000],si
+       mov si,fs:[di+30000]
+       mov fs:[di+50000],si
        dec di
        jnz @l1
        mov dist,dx
@@ -52,9 +52,9 @@ route8 proc near
        shl si,1
        mov di,dx                       ; (dx)=amount of steps
        inc di                          ; amount of steps+1 -> (di)
-       cmp word ptr [fs:si-256],di     ; [ownseg:(y-1)*256+x]=am. of steps
+       cmp word ptr fs:[si-256],di     ; [ownseg:(y-1)*256+x]=am. of steps
        jbe @lab0
-       cmp byte ptr [gs:bx-128],0      ; if[mapseg:bx-128]=0 then enterable
+       cmp byte ptr gs:[bx-128],0      ; if[mapseg:bx-128]=0 then enterable
        jne @lab0
 
        push bx
@@ -72,9 +72,9 @@ route8 proc near
        shl si,1
        mov di,dx                       ; (dx)=amount of steps
        inc di                          ; amount of steps+1 -> (di)
-       cmp word ptr [fs:si+2],di       ; [ownseg:y*256+x+2]=am. of steps
+       cmp word ptr fs:[si+2],di       ; [ownseg:y*256+x+2]=am. of steps
        jbe @lab2
-       cmp byte ptr [gs:bx+1],0        ; if[mapseg:bx+1]=0 then enterable
+       cmp byte ptr gs:[bx+1],0        ; if[mapseg:bx+1]=0 then enterable
        jne @lab2
 
        push bx
@@ -92,9 +92,9 @@ route8 proc near
        shl si,1
        mov di,dx                       ; (dx)=amount of steps
        inc di                          ; amount of steps+1 -> (di)
-       cmp word ptr [fs:si+256],di     ; [ownseg:(y+1)*256+x]=am. of steps
+       cmp word ptr fs:[si+256],di     ; [ownseg:(y+1)*256+x]=am. of steps
        jbe @lab4
-       cmp byte ptr [gs:bx+128],0      ; if[mapseg:bx+128]=0 then enterable
+       cmp byte ptr gs:[bx+128],0      ; if[mapseg:bx+128]=0 then enterable
        jne @lab4
 
        push bx
@@ -112,9 +112,9 @@ route8 proc near
        shl si,1
        mov di,dx                       ; (dx)=amount of steps
        inc di                          ; amount of steps+1 -> (di)
-       cmp word ptr [fs:si-2],di       ; [ownseg:y*256+x-2]=am. of steps
+       cmp word ptr fs:[si-2],di       ; [ownseg:y*256+x-2]=am. of steps
        jbe @lab6
-       cmp byte ptr [gs:bx-1],0        ; if[mapseg:bx-1]=0 then enterable
+       cmp byte ptr gs:[bx-1],0        ; if[mapseg:bx-1]=0 then enterable
        jne @lab6
 
        push bx
@@ -132,9 +132,9 @@ route8 proc near
        shl si,1
        mov di,dx                       ; (dx)=amount of steps
        inc di                          ; amount of steps+1 -> (di)
-       cmp word ptr [fs:si-254],di     ; [ownseg:(y-1)*256+x+2]=am. of steps
+       cmp word ptr fs:[si-254],di     ; [ownseg:(y-1)*256+x+2]=am. of steps
        jbe @lab1
-       cmp byte ptr [gs:bx-127],0      ; if[mapseg:bx-127]=0 then enterable
+       cmp byte ptr gs:[bx-127],0      ; if[mapseg:bx-127]=0 then enterable
        jne @lab1
 
        push bx
@@ -152,9 +152,9 @@ route8 proc near
        shl si,1
        mov di,dx                       ; (dx)=amount of steps
        inc di                          ; amount of steps+1 -> (di)
-       cmp word ptr [fs:si+258],di     ; [ownseg:(y+1)*256+x+2]=am. of steps
+       cmp word ptr fs:[si+258],di     ; [ownseg:(y+1)*256+x+2]=am. of steps
        jbe @lab3
-       cmp byte ptr [gs:bx+129],0      ; if[mapseg:bx+129]=0 then enterable
+       cmp byte ptr gs:[bx+129],0      ; if[mapseg:bx+129]=0 then enterable
        jne @lab3
 
        push bx
@@ -172,9 +172,9 @@ route8 proc near
        shl si,1
        mov di,dx                       ; (dx)=amount of steps
        inc di                          ; amount of steps+1 -> (di)
-       cmp word ptr [fs:si+254],di     ; [ownseg:(y+1)*256+x-2]=am. of steps
+       cmp word ptr fs:[si+254],di     ; [ownseg:(y+1)*256+x-2]=am. of steps
        jbe @lab5
-       cmp byte ptr [gs:bx+127],0      ; if[mapseg:bx+127]=0 then enterable
+       cmp byte ptr gs:[bx+127],0      ; if[mapseg:bx+127]=0 then enterable
        jne @lab5
 
        push bx
@@ -192,9 +192,9 @@ route8 proc near
        shl si,1
        mov di,dx                       ; (dx)=amount of steps
        inc di                          ; amount of steps+1 -> (di)
-       cmp word ptr [fs:si-258],di     ; [ownseg:(y-1)*256+x-2]=am. of steps
+       cmp word ptr fs:[si-258],di     ; [ownseg:(y-1)*256+x-2]=am. of steps
        jbe @lab7
-       cmp byte ptr [gs:bx-129],0      ; if[mapseg:bx-129]=0 then enterable
+       cmp byte ptr gs:[bx-129],0      ; if[mapseg:bx-129]=0 then enterable
        jne @lab7
 
        push bx

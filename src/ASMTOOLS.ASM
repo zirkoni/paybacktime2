@@ -115,27 +115,27 @@ fastp_586  proc far light,cord,times,gfxofs,infofs:word
            mov  bp,light
 
 mainloop_586:
-           mov  ax,[fs:bx]
-           mov  cx,[fs:bx+2]
+           mov  ax,fs:[bx]
+           mov  cx,fs:[bx+2]
            add  di,ax
            add  bx,4
            shr  cx,1
            jnc  inloop_586
 
-           mov  al,[ds:si]
+           mov  al,ds:[si]
            inc  di
            sub  ax,bp
            inc  si
-           mov  [es:di-1],al
+           mov  es:[di-1],al
 
            or   cx,cx
            jz   end_586
 inloop_586:
-           mov  ax,[ds:si]
+           mov  ax,ds:[si]
            add  di,2
            sub  ax,bp
            add  si,2
-           mov  [es:di-2],ax
+           mov  es:[di-2],ax
 
            dec  cx
            jnz  inloop_586
@@ -226,14 +226,14 @@ inter_low_level proc far l_t:dword,l_l:dword,l_r:dword,l_b:dword,coord,gfxofs:wo
            push bx                ;light_level offset to stack
 
 @inter_render1:
-           mov  ch,[ds:si]
+           mov  ch,ds:[si]
            mov  ebx,edx
            shr  ebx,fixed
            mov  bh,10
            sub  bh,bl
            sub  ch,bh
 
-           mov  [es:di],ch
+           mov  es:[di],ch
            sub  edx,eax
 
            inc  di
@@ -269,14 +269,14 @@ inter_low_level proc far l_t:dword,l_l:dword,l_r:dword,l_b:dword,coord,gfxofs:wo
            push bx                ;light_level offset to stack
 
 @inter_render2:
-           mov  ch,[ds:si]
+           mov  ch,ds:[si]
            mov  ebx,edx
            shr  ebx,fixed
            mov  bh,10
            sub  bh,bl
            sub  ch,bh
 
-           mov  [es:di],ch
+           mov  es:[di],ch
            sub  edx,eax
 
            inc  di
@@ -315,8 +315,8 @@ fastp proc far light,toseg,cord,times,gfxofs,infofs,gseg,iseg:word
            mov  fs,iseg
            mov  ds,gseg
 mainloop:
-           mov  ax,[fs:bx]
-           mov  cx,[fs:bx+2]
+           mov  ax,fs:[bx]
+           mov  cx,fs:[bx+2]
            add  di,ax
            add  bx,4
            shr  cx,1
@@ -408,11 +408,11 @@ los proc far X1,Y1,X2,Y2,mapseg,mapoffs,entseg1,entofs1:word
     shl cx,7
     add di,cx
     add di,dx
-    mov al,[fs:di] ;al=map[x,y]
+    mov al,fs:[di] ;al=map[x,y]
 
     mov di,entofs1
     add di,ax
-    mov al,[gs:di] ;al=enterable or not (1/0)
+    mov al,gs:[di] ;al=enterable or not (1/0)
     or  al,al
     je  @nosight
 
@@ -471,7 +471,7 @@ fontxy   proc far x,y,stseg,stofs,fontseg,toseg,col,bcol,len:word
          mov cx,len               ; cx = string length
          xor ax,ax
 @fontl:  ;xor si,si
-         mov byte ptr ch,[gs:bx]  ; gs:bx points to string
+         mov byte ptr ch,gs:[bx]  ; gs:bx points to string
          movzx si,ch
          or  ch,ch
          jz @new
@@ -529,7 +529,7 @@ fontxyt  proc far x,y,stseg,stofs,fontseg,toseg,col,len:word
          mov cx,len               ; cx = string length
          xor ax,ax
 @fontl1: xor si,si
-         mov byte ptr ch,[gs:bx]  ; gs:bx points to string
+         mov byte ptr ch,gs:[bx]  ; gs:bx points to string
          movzx si,ch
          or  ch,ch
          jz @new1
@@ -589,7 +589,7 @@ sfontxy  proc far x,y,stseg,stofs,fontseg,toseg,col,bcol,len:word
          mov cx,len               ; cx = string length
          xor ax,ax
 @fontl2: xor si,si
-         mov byte ptr ch,[gs:bx]  ; gs:bx points to string
+         mov byte ptr ch,gs:[bx]  ; gs:bx points to string
          movzx si,ch
          or  ch,ch
          jz @new2
@@ -649,7 +649,7 @@ sfontxyt proc far x,y,stseg,stofs,fontseg,toseg,col,len:word
          mov cx,len               ; cx = string length
          xor ax,ax
 @fontl3: xor si,si
-         mov byte ptr ch,[gs:bx]  ; gs:bx points to string
+         mov byte ptr ch,gs:[bx]  ; gs:bx points to string
          movzx si,ch
          or  ch,ch
          jz @new3

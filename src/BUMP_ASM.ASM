@@ -18,10 +18,10 @@ produce_bump_fast proc liseg,ownseg,dseg1,dseg2:word
       mov si,63999  ; current offset (without modifications)
 
 @inner:
-      mov al,[fs:si]
+      mov al,fs:[si]
       cbw
       mov bx,ax
-      mov al,[gs:si]
+      mov al,gs:[si]
       cbw
       mov di,ax
       sal di,8
@@ -29,8 +29,8 @@ produce_bump_fast proc liseg,ownseg,dseg1,dseg2:word
       add di,ax
       add bx,di
 
-      mov al,[ds:si+bx]
-      mov [es:si],al
+      mov al,ds:[si+bx]
+      mov es:[si],al
 
       dec si
       jnz @inner
@@ -51,9 +51,9 @@ produce_bump_fast2 proc liseg,ownseg,dseg1,dseg2:word
 @inner2:
       mov bx,si
       add bx,bx
-      mov bx,[fs:bx]
-      mov al,[ds:bx]
-      mov [es:si],al
+      mov bx,fs:[bx]
+      mov al,ds:[bx]
+      mov es:[si],al
       dec si
       jnc @inner2
 
@@ -61,9 +61,9 @@ produce_bump_fast2 proc liseg,ownseg,dseg1,dseg2:word
 @inner22:
       mov bx,si
       add bx,bx
-      mov bx,[gs:bx]
-      mov al,[ds:bx]
-      mov [es:si+32000],al
+      mov bx,gs:[bx]
+      mov al,ds:[bx]
+      mov es:[si+32000],al
       dec si
       jnc @inner22
 
@@ -81,12 +81,12 @@ produce_illumination_fast proc oseg,cseg,iseg:word
       mov si,63999    ; current offset
       xor ax,ax
 @@inner:
-      mov bl,[es:si]
+      mov bl,es:[si]
       shl bx,8
-      mov al,[fs:si]
+      mov al,fs:[si]
       mov di,ax
-      mov al,[ds:bx+di]
-      mov [es:si],al
+      mov al,ds:[bx+di]
+      mov es:[si],al
 
       dec si
       jnz @@inner
