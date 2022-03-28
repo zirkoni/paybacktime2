@@ -1,3 +1,4 @@
+mkdir gamedata
 move 3dgame.exe gamedata\game1.dat
 move grouped.exe gamedata\game2.dat
 move weaponed.exe gamedata\game3.dat

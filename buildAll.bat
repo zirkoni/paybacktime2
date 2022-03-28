@@ -1,12 +1,13 @@
 cd src
+@echo Starting compilation... > ..\compile.log
 
-tasm ASMTOOLS.ASM
-tasm BLASTER.ASM
-tasm BUMP_ASM.ASM
-tasm RADPLAY.ASM
-tasm ROUTE.ASM
+tasm ASMTOOLS.ASM   >> ..\compile.log
+tasm BLASTER.ASM    >> ..\compile.log
+tasm BUMP_ASM.ASM   >> ..\compile.log
+tasm RADPLAY.ASM    >> ..\compile.log
+tasm ROUTE.ASM      >> ..\compile.log
 
-call tp.bat
 call regc.bat
 
+@echo Compilation finished >> ..\compile.log
 cd..
